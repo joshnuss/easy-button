@@ -27,6 +27,7 @@ class BigAssButton
             puts "REBOOT SPHINX!"
             puts border
             
+            # Make this anything you want!
             system File.expand_path('../lib/restart_sphinx.sh', Dir.pwd)
             
             puts border
