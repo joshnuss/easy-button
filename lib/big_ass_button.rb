@@ -19,29 +19,36 @@ class BigAssButton
     SerialPort.open @device, @port do |port| 
       begin
         while data = port.readline
-          if data.strip == BTN_COMMAND
-            puts border
-            
-            Alerter.alert 'I am going to make this easy.'
-            puts "Executing: #{@cmd}"
-            
-            success = system @cmd
-            
-            msg = success ? "That was easy!" : "Error: #{$?}"
-            Alerter.alert msg
-            puts msg
-            
-            puts border
-            @count += 1
-            
-            puts stats
-          end
+          run_command if data.strip == BTN_COMMAND
         end
       rescue Interrupt, EOFError
         puts "\rgoing bye bye now"
         puts stats(true)
       end
     end
+  end
+  
+  protected
+  
+  def run_command
+    puts border
+    
+    Alerter.alert 'I am going to make this easy.'
+    puts "Executing: #{@cmd}"
+    
+    success = system @cmd
+    
+    msg = if success
+      @count += 1
+      "That was easy!"
+    else
+      "Error: #{$?}"
+    end
+    
+    Alerter.alert msg
+    puts msg
+    puts border
+    puts stats
   end
   
   private
