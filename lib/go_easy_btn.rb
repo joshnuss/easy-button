@@ -7,6 +7,7 @@ class BigAssButton
   
   def initialize(options = {})
     raise 'not found serial port has been' unless File.exists? options[:dev]
+    raise ':cmd must be something!' if options[:cmd].nil? || options[:cmd] == ''
     @cmd = options[:cmd]
     @device = options[:dev]
     @port = options[:port] || 115200
@@ -16,6 +17,7 @@ class BigAssButton
   
   def make_it_easy
     puts "Making It Easy\n\n"
+    
     SerialPort.open @device, @port do |port| 
       begin
         while data = port.readline
