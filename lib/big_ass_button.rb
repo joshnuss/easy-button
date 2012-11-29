@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'serialport'
+require File.expand_path('alerter', File.dirname(__FILE__))
 
 class BigAssButton
   BTN_COMMAND = 'PRESSED'
@@ -22,8 +23,10 @@ class BigAssButton
             puts border
             
             puts "Executing: #{@cmd}"
-            success = system @cmd
-            puts success ? "Done, for now." : "Error: #{$?}"
+            system @cmd
+            msg = success ? "I totally just restarted sphinx!" : "Error: #{$?}"
+            Alerter.alert msg
+            puts msg
             
             puts border
             @count += 1
