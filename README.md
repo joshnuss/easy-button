@@ -1,4 +1,4 @@
-![Picture](https://github.com/joshnuss/big-ass-button/raw/master/images/easy-button.jpg)
+![Picture](https://github.com/joshnuss/easy-button/raw/master/images/easy-button.jpg)
 
 # USB Easy Button
 
