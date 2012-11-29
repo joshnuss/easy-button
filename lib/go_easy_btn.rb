@@ -23,8 +23,7 @@ class GoEasyButton
           run_command if data.strip == BTN_COMMAND
         end
       rescue Interrupt, EOFError
-        puts "\rgoing bye bye now"
-        puts stats(true)
+        puts "\rgoing bye bye now", stats(true)
       end
     end
   end
@@ -47,9 +46,7 @@ class GoEasyButton
     end
     
     Alerter.alert msg
-    puts msg
-    puts border
-    puts stats
+    puts msg, border, stats
   end
   
   private
