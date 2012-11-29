@@ -1,6 +1,12 @@
 #!/usr/bin/env ruby
 
+=begin
+  Example Usage: 
+    Linux: go_easy_btn <cmd> /dev/ttyUSB0
+    Mac: go_easy_btn <cmd> /dev/tty.usbmodem12341
+=end
+
 require File.expand_path('../lib/big_ass_button', File.dirname(__FILE__))
 
-btn = BigAssButton.new ARGV[0] || '/dev/tty.usbmodem12341'
+btn = BigAssButton.new :cmd => ARGV[0], :dev => (ARGV[1] || '/dev/tty.usbmodem12341')
 btn.make_it_easy

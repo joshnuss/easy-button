@@ -1,19 +1,14 @@
-=begin
-  Example Usage: 
-    Linux: ruby big_ass_button.rb /dev/ttyUSB0
-    Mac: ruby big_ass_button.rb /dev/tty.usbmodem12341
-=end
-
 require 'rubygems'
 require 'serialport'
 
 class BigAssButton
   BTN_COMMAND = 'PRESSED'
   
-  def initialize(device, port = 115200)
-    raise 'not found serial port has been' unless File.exists? device
-    @device = device
-    @port = port
+  def initialize(options = {})
+    raise 'not found serial port has been' unless File.exists? options[:dev]
+    @cmd = options[:cmd]
+    @device = options[:dev]
+    @port = options[:port] || 115200
     @count = 0
     @start_time = Time.now
   end
@@ -24,15 +19,15 @@ class BigAssButton
       begin
         while data = port.readline
           if data.strip == BTN_COMMAND
-            puts "REBOOT SPHINX!"
             puts border
             
-            # Make this anything you want!
-            system File.expand_path('../lib/restart_sphinx.sh', Dir.pwd)
+            puts "Executing: #{@cmd}"
+            success = system @cmd
+            puts success ? "Done, for now." : "Error: #{$?}"
             
             puts border
             @count += 1
-            puts "Done, for now."
+            
             puts stats
           end
         end
