@@ -4,7 +4,8 @@ Gem::Specification.new do |s|
   s.has_rdoc = false
   s.required_ruby_version = ">= 1.8.7"
   s.platform = "ruby"
-  s.require_paths = ['lib', 'bin']
+  s.bindir = 'bin'
+  s.require_paths = ['lib']
   s.required_rubygems_version = ">= 0"
   s.add_dependency 'serialport'
   s.author = "Josh Nussbaum, Diego Salazar"
