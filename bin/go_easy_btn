@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require '../lib/big_ass_button'
+
+btn = BigAssButton.new ARGV[0] || '/dev/tty.usbmodem12341'
+btn.make_it_easy
