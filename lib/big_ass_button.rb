@@ -25,7 +25,7 @@ class BigAssButton
             Alerter.alert 'I am going to make this easy.'
             puts "Executing: #{@cmd}"
             
-            system @cmd
+            success = system @cmd
             
             msg = success ? "I totally just restarted sphinx!" : "Error: #{$?}"
             Alerter.alert msg
