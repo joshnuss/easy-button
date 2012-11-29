@@ -22,8 +22,11 @@ class BigAssButton
           if data.strip == BTN_COMMAND
             puts border
             
+            Alerter.alert 'I am going to make this easy.'
             puts "Executing: #{@cmd}"
+            
             system @cmd
+            
             msg = success ? "I totally just restarted sphinx!" : "Error: #{$?}"
             Alerter.alert msg
             puts msg
