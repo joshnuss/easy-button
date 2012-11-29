@@ -2,4 +2,4 @@
 
 # USB Easy Button
 
-Adds usb support to usb button, useful for controlling all kinds of stuff with one "easy" press.
+Adds usb support to Staples Easy Button, useful for controlling all kinds of stuff with one "easy" press.
