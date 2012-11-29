@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require '../lib/big_ass_button'
+require File.expand_path('../lib/big_ass_button', File.dirname(__FILE__))
 
 btn = BigAssButton.new ARGV[0] || '/dev/tty.usbmodem12341'
 btn.make_it_easy
