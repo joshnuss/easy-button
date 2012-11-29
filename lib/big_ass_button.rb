@@ -27,7 +27,7 @@ class BigAssButton
             
             success = system @cmd
             
-            msg = success ? "I totally just restarted sphinx!" : "Error: #{$?}"
+            msg = success ? "That was easy!" : "Error: #{$?}"
             Alerter.alert msg
             puts msg
             

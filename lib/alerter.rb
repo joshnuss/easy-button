@@ -2,7 +2,7 @@ class Alerter
   class << self
     def alert(msg, options ={})
       if mac?
-        system "say \"#{msg}\""
+        system "say -v Cellos \"#{msg}\""
       elsif linux?
         system "echo \"#{msg}\"|espeak"
       else
