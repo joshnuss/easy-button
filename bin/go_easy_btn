@@ -1,12 +1,23 @@
 #!/usr/bin/env ruby
 
-=begin
-  Example Usage: 
-    Linux: go_easy_btn <cmd> /dev/ttyUSB0
-    Mac: go_easy_btn <cmd> /dev/tty.usbmodem12341
-=end
+def usage
+  <<-USAGE
+  Usage:
+
+    go_easy_btn <cmd> <device> <baud>"
+
+  Example:
+    go_easy_btn "say 'Im a shell script called from $(pwd)'" /dev/tty.usbmodem12341 115200
+
+  USAGE
+end
+
+if ARGV[0].nil? || ARGV[0] == ''
+  puts usage
+  exit false
+end
 
 require 'go_easy_btn'
 
-btn = BigAssButton.new :cmd => ARGV[0], :dev => (ARGV[1] || '/dev/tty.usbmodem12341')
+btn = GoEasyButton.new :cmd => ARGV[0], :dev => (ARGV[1] || '/dev/tty.usbmodem12341'), :baud => ARGV[2]
 btn.make_it_easy

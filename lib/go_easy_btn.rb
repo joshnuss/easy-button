@@ -1,16 +1,15 @@
 require 'rubygems'
 require 'serialport'
-require File.expand_path('alerter', File.dirname(__FILE__))
+require 'alerter'
 
-class BigAssButton
+class GoEasyButton
   BTN_COMMAND = 'PRESSED'
   
   def initialize(options = {})
     raise 'not found serial port has been' unless File.exists? options[:dev]
-    raise ':cmd must be something!' if options[:cmd].nil? || options[:cmd] == ''
     @cmd = options[:cmd]
     @device = options[:dev]
-    @port = options[:port] || 115200
+    @port = options[:baud] || 115200
     @count = 0
     @start_time = Time.now
   end
