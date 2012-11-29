@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.has_rdoc = false
   s.required_ruby_version = ">= 1.8.7"
   s.platform = "ruby"
-  s.bindir = 'bin'
+  s.executables << 'go_easy_btn'
   s.require_paths = ['lib']
   s.required_rubygems_version = ">= 0"
   s.add_dependency 'serialport'
@@ -13,5 +13,5 @@ Gem::Specification.new do |s|
   s.summary = %q{Make things Easy!}
   s.homepage = %q{https://github.com/joshnuss/easy-button}
   s.description = %q{Hook up easy button via USB serial port and trigger shell commands}
-  s.files = ["lib/big_ass_button.rb", "lib/alerter.rb", "lib/big_ass_button.rb", "bin/go_easy_btn"]
+  s.files = ["lib/go_easy_btn.rb", "lib/alerter.rb", "bin/go_easy_btn"]
 end

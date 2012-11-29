@@ -15,7 +15,7 @@ class BigAssButton
   end
   
   def make_it_easy
-    puts "Making It Easy™\n\n"
+    puts "Making It Easy\n\n"
     SerialPort.open @device, @port do |port| 
       begin
         while data = port.readline
