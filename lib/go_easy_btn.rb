@@ -6,24 +6,25 @@ class GoEasyButton
   BTN_COMMAND = 'PRESSED'
   
   def initialize(options = {})
-    raise 'not found serial port has been' unless File.exists? options[:dev]
+    raise Errno::ENOENT, 'not found serial port has been' unless File.exists? options[:dev]
     @cmd = options[:cmd]
     @device = options[:dev]
-    @port = options[:baud] || 115200
+    @baud = options[:baud] || 115200
     @count = 0
     @start_time = Time.now
   end
   
   def make_it_easy
-    puts "Making It Easy\n\n"
-    
-    SerialPort.open @device, @port do |port| 
+    SerialPort.open @device, @baud do |port| 
       begin
+        puts "Making It Easy\n\n"
         while data = port.readline
           run_command if data.strip == BTN_COMMAND
         end
-      rescue Interrupt, EOFError
+      rescue Interrupt
         puts "\rgoing bye bye now", stats(true)
+      rescue EOFError
+        handle_disconnect
       end
     end
   end
@@ -33,7 +34,7 @@ class GoEasyButton
   def run_command
     puts border
     
-    Alerter.alert 'I am going to make this easy.'
+    Thread.new { Alerter.alert 'I am going to make this easy?' }
     puts "Executing: #{@cmd}"
     
     success = system @cmd
@@ -47,6 +48,13 @@ class GoEasyButton
     
     Alerter.alert msg
     puts msg, border, stats
+  end
+  
+  def handle_disconnect(msg = 'disconnected')
+    make_it_easy
+  rescue Errno::ENOENT # still not connected
+    sleep 1
+    retry
   end
   
   private
